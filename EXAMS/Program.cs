@@ -12,7 +12,31 @@ namespace EXAMS
     {
         private static void Main(string[] args)
         {
-            Six_FourtyOne();
+            //Six_FourtyOne();
+            /*Six_one();*/
+            Six_two();
+
+            void Six_two()
+            {
+                var card = new PupulCard(10, new PupulCard.ExpiredDate { Mounth = 10, Year = 10 }, 10, PupulCard.lockStatus.unlocked);
+
+                var card2 = new PupulCard(12, new PupulCard.ExpiredDate { Mounth = 10, Year = 22 }, 11, PupulCard.lockStatus.unlocked);
+
+                var card3 = new PupulCard(15, new PupulCard.ExpiredDate { Mounth = 01, Year = 22 }, 12, PupulCard.lockStatus.unlocked);
+                card3.Pay(40);
+                var sc = new School();
+                sc.Schoolarhsip += card.GetMoney;
+                sc.Schoolarhsip += card2.GetMoney;
+                sc.Money();
+                var col = new List<PupulCard> { card, card2, card3 };
+                var selected = col.Where(x => x.status == PupulCard.lockStatus.locked).OrderBy(x => x.balance).First();
+                var selected2 = col.Where(x => x.status == PupulCard.lockStatus.unlocked).Count();
+
+                Console.WriteLine(selected.number);
+                Console.WriteLine();
+                Console.WriteLine(selected2);
+            }
+
             void Six_FourtyOne()
             {
                 var doc = new Document("     BRUH   123 HELLO   ");
