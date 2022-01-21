@@ -6,6 +6,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
+using System.Threading.Tasks;
+using System.Threading;
+
 namespace EXAMS
 {
     internal class Program
@@ -14,7 +17,35 @@ namespace EXAMS
         {
             //Six_FourtyOne();
             /*Six_one();*/
-            Six_two();
+            // Six_two();
+            five_two();
+
+            void five_two()
+            {
+                var arrp = new Own[] { new Own { Status = Own.states.ready }, new Own { Status = Own.states.coocking }, new Own { Status = Own.states.coocking }, new Own { Status = Own.states.finish } };
+
+                try
+                {
+                    if (arrp.Where(x => x.Status == Own.states.coocking).Count() == 0)
+                    {
+                        throw new NotWorkingExeption("NO working");
+                    }
+                    else
+                    {
+                        Console.WriteLine(arrp.Where(x => x.Status == Own.states.coocking).Count());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+                foreach (var x in arrp)
+                {
+                    new Task(() => x.Cook()).Start();
+                }
+                Thread.Sleep(100);
+            }
 
             void Six_two()
             {
